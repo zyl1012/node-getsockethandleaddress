@@ -22,7 +22,7 @@ uv_handle_t* getTcpHandle(void *handleWrap) {
 }
 void getAddress(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();  
-  void *handleWrap = args[0]->ToObject()->GetAlignedPointerFromInternalField(0);  
+  void *handleWrap = args[0]->ToObject(isolate)->GetAlignedPointerFromInternalField(0);  
   uv_handle_t* handle = getTcpHandle(handleWrap);  
   uv_tcp_t* tcpHandle = (uv_tcp_t*)handle;
   args.GetReturnValue().Set(Number::New(isolate, tcpHandle->socket));
